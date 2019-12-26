@@ -1,0 +1,64 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Description: A simple Hello World Serverless project
+Resources:
+  kickoffInstances:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: python3.8
+      Handler: handler.kick_off_ec2
+      Timeout: 120
+      CodeUri: .
+      # Tracing: Active
+      Environment:
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - ec2:DescribeRegions
+                - ec2:DescribeInstances
+                - ec2:StopInstances
+                - ec2:StartInstances
+              Resource: '*'
+
+            - Effect: Allow
+              Action:
+                - logs:CreateLogGroup
+                - logs:CreateLogStrem
+                - logs:PutLogEvents
+              Resource: arn:aws:logs:*:*:*
+
+      Events:
+        ScheduleEvent:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0 9 * * ? *)
+
+  endInstances:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: python3.8
+      Handler: handler.end_ec2
+      Timeout: 120
+      CodeUri: .
+      # Tracing: Active
+      Environment:
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - ec2:DescribeRegions
+                - ec2:DescribeInstances
+                - ec2:StopInstances
+                - ec2:StartInstances
+              Resource: '*'
+
+            - Effect: Allow
+              Action:
+                - logs:CreateLogGroup
+                - logs:CreateLogStrem
+                - logs:PutLogEvents
+              Resource: arn:aws:logs:*:*:*
