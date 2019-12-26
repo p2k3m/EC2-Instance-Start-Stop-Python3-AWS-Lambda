@@ -42,3 +42,9 @@ sam package --template-file ./lambda.yml --output-template-file sam-template.yml
 Deploy Package
 
 sam deploy --template-file sam-template.yml --stack-name ec2-kick-off-end --capabilities CAPABILITY_IAM
+
+ Deploying
+ ------------
+
+
+ ![alt text](https://pictures142857.s3.ap-south-1.amazonaws.com/sam.PNG)
