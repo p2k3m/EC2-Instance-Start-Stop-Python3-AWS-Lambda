@@ -35,18 +35,11 @@ sls create --template aws-python3 --path ec2-start-stop
 cd ec2-start-stop
 sls deploy -v
 
-**To invoke a function:**
+**To Invoke Local:**
 
-sls invoke -f ec2-start -l
+sls invoke local -f ec2-start
 
-sls invoke -f ec2-stop -l
-
-**To see logs:**
-
-sls logs -f ec2-start -t
-
-sls logs -f ec2-stop -t
-
+sls invoke local -f ec2-stop
 
 ### Prerequisites
 
@@ -120,7 +113,7 @@ Give an example
 
 Add additional notes about how to deploy this on a live system
 
-Future Enhancements 
+**Future Enhancements** 
 
 ```
 This can be integrated with Continuous Integration frameworks
