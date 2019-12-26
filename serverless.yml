@@ -1,0 +1,55 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: ec2-start-stop
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+# frameworkVersion: "=X.X.X"
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: eu-west-1
+  profile: serverless-admin
+  memorySize: 128
+  iamRoleStatements :
+    - Effect: "Allow"
+      Action:
+        - "logs:CreateLogGroup"
+        - "logs:CreateLogStrem"
+        - "logs:PutLogEvents"
+      Resource: "arn:aws:logs:*:*:*"
+
+    - Effect: "Allow"
+      Action:
+        - "ec2:DescribeInstances"
+        - "ec2:DescribeRegions"
+        - "ec2:StartInstances"
+        - "ec2:StopInstances"
+      Resource: "*"
+
+functions:
+  start-ec2:
+    handler: handler.start_ec2
+    timeout: 120
+    events:
+      - schedule: cron(0 9 * * ? *) # runs at 1 AM UTC every day
+  stop-ec2:
+    handler: handler.stop_ec2
+    timeout: 120
+    events:
+      - schedule: cron(0 5 * * ? *) # runs at 5 PM UTC every day
