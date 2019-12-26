@@ -9,6 +9,8 @@ It integrates well with CI/CD tools
 
 It has CloudFormation support so your entire stack can be deployed using this Framework 
 
+This iterates over all region in AWS and checks tags and stops or start EC2 at scheduled time
+
 
 **Supported cron format**
 
@@ -71,7 +73,18 @@ A step by step series of examples that tell you how to get a development env run
 Say what the step will be
 
 ```
-Give the example
+**To invoke a function:**
+
+sls invoke -f ec2-start -l
+
+sls invoke -f ec2-stop -l
+
+**To see logs:**
+
+sls logs -f ec2-start -t
+
+sls logs -f ec2-stop -t
+
 ```
 
 And repeat
@@ -80,11 +93,12 @@ And repeat
 until finished
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+This can be integrated with Continuous Integration frameworks
+
+This can be integrated with Continuous Delivery frameworks
 
 ### Break down into end to end tests
 
@@ -105,4 +119,20 @@ Give an example
 ## Deployment
 
 Add additional notes about how to deploy this on a live system
+
+Future Enhancements 
+
+```
+This can be integrated with Continuous Integration frameworks
+
+This can be integrated with Continuous Delivery frameworks
+
+Improve CRON Job to only run on weekdays
+
+Looping strategy if we have over 100 EC2 instances
+
+Improve Logs to display in message in case no instances are to be stopped or started
+
+
+```
 
